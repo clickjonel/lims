@@ -13,7 +13,9 @@
     })
 
     const fetchDashboardData = async () => {
-        const response = await fetchRequest('dashboard',{})
+        const response = await fetchRequest('dashboard',{
+            user_id:15
+        })
         recents.value = response.data.recents
         totals.value = response.data.totals
     }
