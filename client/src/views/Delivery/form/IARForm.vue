@@ -506,7 +506,7 @@
                     </div>
                     <div class="w-full flex justify-center items-center gap-2 p-2">
                         <div class="w-2/3 flex flex-col justify-center items-center">
-                            <span class="w-full font-medium uppercase border-b text-center">Felina S. Carlos</span>
+                            <span class="w-full font-medium uppercase border-b text-center">Christine K. Dirige</span>
                             <span>Administrative Officer V</span>
                             <span>Head of Supply Office (Property Custodian)</span>
                         </div>
