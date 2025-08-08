@@ -32,6 +32,8 @@ class Delivery extends Model
         'payment_term',
         'completion',
         'purpose',
+        'iar_accepted',
+        'rejection_reason'
     ];
 
     protected $appends = [

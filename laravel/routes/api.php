@@ -35,6 +35,7 @@ Route::group([
         Route::get('find',[DeliveryController::class,'find']);
         Route::get('iar',[DeliveryController::class,'getIARData']);
         Route::get('nod/find',[DeliveryController::class,'nodFindIAR']);
+        Route::post('accept_reject',[DeliveryController::class,'acceptRejectDelivery']);
     });
 
     // Stock Card Group

@@ -23,6 +23,7 @@ import TransferProperty from '@/views/Property/form/TransferProperty.vue';
 import CreateInventoryReport from '@/views/Property/form/CreateInventoryReport.vue';
 import Sticker from '@/views/Property/form/Sticker.vue';
 import UserProperties from '@/views/Property/UserProperties.vue';
+import CreateItemStockCard from '@/views/Delivery/form/CreateItemStockCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -95,6 +96,12 @@ const router = createRouter({
       path: '/delivery/create',
       name: 'Create Delivery',
       component: CreateDeliveryForm,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/delivery/items/stock/:id',
+      name: 'Stock Delivery Items',
+      component: CreateItemStockCard,
       meta: { requiresAuth: true }
     },
     {

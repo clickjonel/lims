@@ -4,6 +4,7 @@
     import { useApi } from '@/composables/useApi';
     import { useRouter } from 'vue-router';
     import { useAuthStore } from '@/stores/authStore';
+    import { useToast } from 'primevue';
 
     // components
     import InputText from 'primevue/inputtext';
@@ -14,11 +15,13 @@
 
 
     const router = useRouter()
+    const toast = useToast()
     const user = useAuthStore()
     const deliveries = ref(<any>[])
-    const { fetchRequest } = useApi()
+    const { fetchRequest,postRequest } = useApi()
     const deliveryInvoicesPopover = ref()
     const deliveryReceiptsPopover = ref()
+    const acceptRejectPopover = ref()
 
     var pagination = ref(<Pagination>{
         searchKeyword:'',
@@ -28,6 +31,10 @@
     })
     var selectedDeliveryInvoices = ref(<DeliveryInvoice[]>{})
     var selectedDeliveryReceipts = ref(<DeliveryReceipt[]>{})
+    var selectedAcceptReject = ref<{ deliveryID: number | null, reason: string }>({
+        deliveryID: null,
+        reason: '',
+    });
 
     onMounted(async()=>{
         // console.log(user)
@@ -54,6 +61,30 @@
     const toggleDeliveryReceipts = (event:any,receipts: DeliveryReceipt[]) => {
         selectedDeliveryReceipts.value = receipts
         deliveryReceiptsPopover.value.toggle(event);
+    }
+
+    const toggleAcceptReject = (event:any,deliveryID:number ) => {
+        selectedAcceptReject.value.deliveryID = deliveryID
+        acceptRejectPopover.value.toggle(event);
+    }
+
+    const acceptRejectDelivery = async (code:number) => {
+         const response = await postRequest('deliveries/accept_reject', {
+            delivery_id:selectedAcceptReject.value.deliveryID,
+            iar_accepted:code,
+            rejection_reason:selectedAcceptReject.value.reason
+         })
+         selectedAcceptReject.value = {
+            deliveryID:null,
+            reason:''
+         }
+         acceptRejectPopover.value.hide()
+         toast.add({ 
+            severity: 'success', 
+            summary: 'Updated', 
+            detail: response.data.message, 
+            life: 3000 
+        });
     }
 
     // interfaces
@@ -117,6 +148,8 @@
                 <span class="min-w-[15%] flex justify-start items-center gap-2">
                     <Button @click="router.push({path:`/delivery/update/${delivery.id}`})" v-tooltip="{ value: 'Update Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
                     <Button @click="router.push({path:`/delivery/iar/${delivery.id}`})" v-tooltip="{ value: 'Print IAR', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/>
+                    <Button @click="router.push({path:`/delivery/items/stock/${delivery.id}`})" v-tooltip="{ value: 'Create Stock Card of Items', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-list-check" outlined  size="small" rounded class="text-xs"/>
+                    <Button v-if="delivery.iar_accepted === null" @click="toggleAcceptReject($event,delivery.id)" v-tooltip="{ value: 'Accept/Reject Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-question" outlined  size="small" rounded class="text-xs"/>
                 </span>
             </div>
        </div>
@@ -152,6 +185,17 @@
                 <span class="w-[20%] p-1">{{ receipt.delivery_date }}</span>
                 <span class="w-[40%] p-1">{{ receipt.delivery_place }}</span>
             </div>
+        </div>
+    </Popover>
+
+    <Popover ref="acceptRejectPopover" class="w-[500px]">
+        <FloatLabel variant="on" class="w-full font-poppins mb-2">
+            <InputText v-model="selectedAcceptReject.reason" class="w-full"/>
+            <label>Reason of Rejection (optional)</label>
+        </FloatLabel>
+        <div class="w-full flex justify-start font-poppins text-sm gap-2">
+            <Button @click="acceptRejectDelivery(1)" severity="primary" label="Accepted" icon="pi pi-check-circle"  size="small" class="w-full text-xs"/>
+            <Button @click="acceptRejectDelivery(0)" severity="danger" label="Rejected" icon="pi pi-times"  size="small" class="w-full text-xs"/>
         </div>
     </Popover>
 

@@ -215,4 +215,16 @@ class DeliveryController extends Controller
        }
     }
 
+    public function acceptRejectDelivery(Request $request):JsonResponse
+    {
+        Delivery::find($request->delivery_id)->update([
+            'iar_accepted' => $request->iar_accepted,
+            'rejection_reason' => $request->rejection_reason
+        ]);
+
+        return response()->json([
+            'message' => 'Successfully Updated Delivery Acceptance.'
+        ]);
+    }
+
 }
