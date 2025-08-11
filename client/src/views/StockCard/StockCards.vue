@@ -156,7 +156,7 @@
                 <span class="min-w-[10%]">{{ stock_card.stock_no }}</span>
                 <span class="min-w-[20%]">{{ stock_card.stock_name }}</span>
                 <span class="min-w-[15%]">{{ stock_card.section?.section_name }}</span>
-                <span class="min-w-[10%]">{{ stock_card.latest_transaction.balance }} / {{ stock_card.quantity }}</span>
+                <span class="min-w-[10%]">{{ stock_card.latest_transaction?.balance }} / {{ stock_card.quantity }}</span>
                 <span class="min-w-[15%] flex justify-center items-center p-2">
                     <Button @click="toggleTransactions($event,stock_card.stock_card_transactions)" severity="help" label="Transactions" icon="pi pi-receipt" :badge="String(stock_card.stock_card_transactions_count)" badgeSeverity="contrast" outlined  size="small" class="text-xs"/>
                 </span>

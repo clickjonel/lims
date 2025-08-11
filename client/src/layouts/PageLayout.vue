@@ -11,7 +11,7 @@
 
   const router = useRouter()
   const route = useRoute()
-  const user = useAuthStore()
+  const auth = useAuthStore()
   const { postRequest } = useApi()
   const toast = useToast()
 
@@ -30,8 +30,8 @@
   const logout = async () => {
     const response = await postRequest('logout',{})
       if (response.apiResponseStatus === 200) {
-        user.setToken('')
-        user.isAuthenticated = false
+        auth.setToken('')
+        auth.isAuthenticated = false
         router.push({name:'Login'})
       } else {
          toast.add({ 
@@ -51,7 +51,7 @@
         <div class="w-full min-h-[6%] h-[6%] flex justify-between items-center px-4 bg-white">
             <Button @click="drawerVisible = true" icon="pi pi-arrow-right" rounded severity="info" variant="filled" size="small"/>
             <span class="text-base font-lexend">LIMS | {{ route.name }}</span>
-            <Button type="button" :label="user.user?.nickname" @click="toggleProfile" rounded size="small"/>
+            <Button type="button" :label="auth.user?.nickname" @click="toggleProfile" rounded size="small"/>
         </div>
         <div class="w-full min-h-[93.5%] h-[93.5%] bg-white">
             <RouterView />

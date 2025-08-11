@@ -23,6 +23,7 @@ class DeliveryItems extends Model
         'shelf_life',
         'measurement_unit',
         'description',
+        'stocked'
     ];
 
     public function delivery(): BelongsTo

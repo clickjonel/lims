@@ -37,7 +37,7 @@
     });
 
     onMounted(async()=>{
-        // console.log(user)
+    //    console.log(import.meta.env.VITE_SUPPLY_SECTION_ID)
        fetchDeliveries()
     })
 
@@ -85,6 +85,7 @@
             detail: response.data.message, 
             life: 3000 
         });
+        fetchDeliveries()
     }
 
     // interfaces
@@ -148,7 +149,7 @@
                 <span class="min-w-[15%] flex justify-start items-center gap-2">
                     <Button @click="router.push({path:`/delivery/update/${delivery.id}`})" v-tooltip="{ value: 'Update Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
                     <Button @click="router.push({path:`/delivery/iar/${delivery.id}`})" v-tooltip="{ value: 'Print IAR', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/>
-                    <Button @click="router.push({path:`/delivery/items/stock/${delivery.id}`})" v-tooltip="{ value: 'Create Stock Card of Items', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-list-check" outlined  size="small" rounded class="text-xs"/>
+                    <Button  v-if="delivery.iar_accepted === 1" @click="router.push({path:`/delivery/items/stock/${delivery.id}`})" v-tooltip="{ value: 'Create Stock Card of Items', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-list-check" outlined  size="small" rounded class="text-xs"/>
                     <Button v-if="delivery.iar_accepted === null" @click="toggleAcceptReject($event,delivery.id)" v-tooltip="{ value: 'Accept/Reject Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-question" outlined  size="small" rounded class="text-xs"/>
                 </span>
             </div>

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StockCard\CreateItemStockCardRequest;
 use App\Http\Requests\StockCard\CreateStockCardRequest;
 use App\Http\Requests\StockCard\IssueStocksRequest;
 use App\Http\Requests\StockCard\UpdateStockCardRequest;
+use App\Models\Delivery;
+use App\Models\DeliveryItems;
 use App\Models\StockCard;
 use App\Models\StockCardTransaction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class StockCardController extends Controller
 {
@@ -127,6 +131,33 @@ class StockCardController extends Controller
             'message' => 'Stock Issued Successfully Successfully'
         ]);
 
+    }
+
+    public function createItemStockCard(CreateItemStockCardRequest $request):JsonResponse
+    {
+        $validated = $request->validated();
+
+        $stockCard = StockCard::create($validated);
+
+        StockCardTransaction::create([
+            'stock_card_id' => $stockCard->id,
+            'transaction_date' => $validated['iar_date'],
+            'received' => $validated['quantity'],
+            'issued' => null,
+            'balance' => $validated['quantity'],
+            'total_cost' => $validated['unit_cost'] * $validated['quantity'],
+            'ptr_no' => null,
+            'iar_no' => $validated['iar_no'],
+            'recepient' => 'DOH-CHD-CAR',
+            'remarks' => null
+        ]);
+
+        DeliveryItems::find($validated['item_id'])->update(['stocked'=>1]);
+
+        return response()->json([
+            'message' => 'Stock Card has been Created for this Item',
+            // 'item' => $request->all()
+        ]); 
     }
 
 

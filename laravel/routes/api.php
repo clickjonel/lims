@@ -47,6 +47,7 @@ Route::group([
         Route::get('find',[StockCardController::class,'find']);
         Route::post('update',[StockCardController::class,'update']);
         Route::post('issue',[StockCardController::class,'issue']);
+        Route::post('stock/item',[StockCardController::class,'createItemStockCard']);
     });
 
     // Property Group
