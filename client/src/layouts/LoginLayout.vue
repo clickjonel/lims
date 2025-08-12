@@ -47,8 +47,8 @@
             toast.add({ 
                 severity: 'error', 
                 summary: 'Login Failed', 
-                detail: 'Please Input Valid Credentials, Credentials are The Same as your DOHIS Credentials', 
-                life: 2000 
+                detail: error.response.data.message, 
+                life: 3000 
             });
             console.log(error)
         })

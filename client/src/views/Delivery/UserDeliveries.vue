@@ -114,8 +114,8 @@
                 </span>
                 <span class="min-w-[15%]"> {{ delivery.fund_source.name }} <br> {{ delivery.payment_term_label }} </span>
                 <span class="min-w-[15%] flex justify-start items-center gap-2">
-                    <Button @click="router.push({path:`/delivery/update/${delivery.id}`})" v-tooltip="{ value: 'Update Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
-                    <Button @click="router.push({path:`/delivery/iar/${delivery.id}`})" v-tooltip="{ value: 'Print IAR', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/>
+                    <!-- <Button @click="router.push({path:`/delivery/update/${delivery.id}`})" v-tooltip="{ value: 'Update Delivery', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
+                    <Button @click="router.push({path:`/delivery/iar/${delivery.id}`})" v-tooltip="{ value: 'Print IAR', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="contrast" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/> -->
                 </span>
             </div>
        </div>

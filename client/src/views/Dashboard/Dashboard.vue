@@ -5,6 +5,7 @@
     import { useApi } from '@/composables/useApi';
 
     const { fetchRequest } = useApi()
+    const auth = useAuthStore()
     const recents = ref(<Recents>{})
     const totals = ref(<Totals>{})
 
@@ -14,7 +15,7 @@
 
     const fetchDashboardData = async () => {
         const response = await fetchRequest('dashboard',{
-            user_id:15
+            user_id: auth.isAdmin ? null : auth.user?.user_id ?? null
         })
         recents.value = response.data.recents
         totals.value = response.data.totals

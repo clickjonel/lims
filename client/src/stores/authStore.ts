@@ -19,14 +19,15 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null as User | null,
     token: localStorage.getItem('token') || '',
-    isAuthenticated: false
+    isAuthenticated: false,
+    isAdmin:false
   }),
 
   actions: {
     setUser(user: User) {
       this.user = user
       this.isAuthenticated = true
-      // console.log(this.user)
+      this.isAdmin = user.assignment.section.section_id === 25 || user.assignment.section.section_id === 28 ? true : false
     },
 
     setToken(token: string) {

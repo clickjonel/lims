@@ -8,10 +8,6 @@
     import FloatLabel from 'primevue/floatlabel';
     import Button from 'primevue/button';
     import Select from 'primevue/select';
-    import Textarea from 'primevue/textarea';
-    import InputNumber from 'primevue/inputnumber';
-    import DatePicker from 'primevue/datepicker';
-    import Panel from 'primevue/panel';
     import FormLayout from '@/layouts/FormLayout.vue';
 
     const { fetchRequest,postRequest } = useApi()
@@ -30,7 +26,6 @@
     const findDelivery = async () => {
         const response = await fetchRequest('deliveries/find',{id:route.params.id})
         delivery.value = response.data.delivery
-        console.log(delivery.value)
     }
 
     const fetchWarehouses = async () => {
@@ -134,6 +129,7 @@
             <div v-for="item in delivery.delivery_items" class="w-full flex justify-between items-center gap-4 p-2 border-y bg-[#E3EEF9]">
                 <div class="w-full flex flex-col justify-start items-start gap-4">
                     <span class="text-sm font-light">{{ item.description }}</span>
+
                     <div class="w-full flex justify-start items-start gap-2">
                         <FloatLabel variant="on" class="w-1/3">
                             <InputText v-model="item.stock_no" class="w-full" size="small"/>
@@ -144,6 +140,7 @@
                             <label>Stock Name</label>
                         </FloatLabel>
                     </div>
+
                     <div class="w-full flex justify-start items-start gap-2">
                         <FloatLabel variant="on" class="w-full">
                             <InputText v-model="item.dosage_form" class="w-full" size="small"/>
@@ -154,6 +151,7 @@
                             <label>Dosage Strength</label>
                         </FloatLabel>
                     </div>
+
                     <div class="w-full flex justify-start items-start gap-2">
                         <FloatLabel class="w-full" variant="on">
                             <Select v-model="item.category" :options="stockCardCategories" optionLabel="name" optionValue="id" size="small" class="w-full" />
@@ -167,6 +165,11 @@
 
                     <Button @click="stock(item)" label="Create Stock Card for This Item" severity="info" class="text-xs" size="small" :disabled = "item.availability === 2 || item.stocked === 1"/>
                     
+                    <div class="w-full flex flex-col justify-start items-start text-red-800 font-lexend italic font-light text-xs">
+                        <span v-if="item.availability === 2">*Item is already added to stock card</span>
+                        <span v-if="item.stocked === 1">*Item is a balance delivery</span>
+                    </div>
+
                 </div>
             </div>
         </div>

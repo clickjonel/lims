@@ -66,18 +66,18 @@
             </div>
             <div class="w-full flex flex-col justify-start items-start gap-2 p-2">
               <span class="uppercase font-medium text-lg">Delivery</span>
-              <span @click="navigateTo('/admin/deliveries')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Deliveries' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Deliveries</span>
+              <span v-if="auth.isAdmin" @click="navigateTo('/admin/deliveries')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Deliveries' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Deliveries</span>
               <span @click="navigateTo('/admin/deliveries/user')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'User Deliveries' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">My Deliveries</span>
               <span @click="navigateTo('/admin/deliveries/section')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Section Deliveries' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Section Deliveries</span>
             </div>
             <div class="w-full flex flex-col justify-start items-start gap-2 p-2">
               <span class="uppercase font-medium text-lg">Stock Cards</span>
-              <span @click="navigateTo('/admin/stock_cards')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Stock Cards</span>
+              <span v-if="auth.isAdmin" @click="navigateTo('/admin/stock_cards')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Stock Cards</span>
               <span @click="navigateTo('/admin/stock_cards/section')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Section Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Section Stock Cards</span>
             </div>
             <div class="w-full flex flex-col justify-start items-start gap-2 p-2">
               <span class="uppercase font-medium text-lg">Properties</span>
-              <span @click="navigateTo('/admin/properties')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Properties' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Properties</span>
+              <span v-if="auth.isAdmin" @click="navigateTo('/admin/properties')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Properties' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Properties</span>
               <span @click="navigateTo('/admin/properties/user')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'User Properties' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">My Properties</span>
             </div>
         </div>

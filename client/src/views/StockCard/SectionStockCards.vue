@@ -165,9 +165,9 @@
                 <span class="min-w-[10%]">{{ stock_card.unit_cost }}</span>
                 <span class="min-w-[10%]">{{ stock_card.contract_no }}</span>
                 <span class="min-w-[10%] flex justify-center items-center p-2 gap-2">
-                     <Button @click="router.push({path:`/stock_card/update/${stock_card.id}`})" v-tooltip="{ value: 'Update Stock Card', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
+                     <!-- <Button @click="router.push({path:`/stock_card/update/${stock_card.id}`})" v-tooltip="{ value: 'Update Stock Card', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-file-edit" outlined  size="small" rounded class="text-xs"/>
                      <Button @click="toggleIssuancePopover($event,stock_card.id)" v-tooltip="{ value: 'Issue Stock Card', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="help" icon="pi pi-arrow-circle-right" outlined  size="small" rounded class="text-xs"/>
-                     <Button @click="router.push({path:`/stock_card/view/${stock_card.id}`})" v-tooltip="{ value: 'View Stock Card', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="primary" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/>
+                     <Button @click="router.push({path:`/stock_card/view/${stock_card.id}`})" v-tooltip="{ value: 'View Stock Card', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="primary" icon="pi pi-print" outlined  size="small" rounded class="text-xs"/> -->
                 </span>
             </div>
        </div>

@@ -18,7 +18,7 @@ class AuthenticationController extends Controller
 
         $user = User::with(['assignment.section'])->where('username',$credentials['username'])->where('password',md5($credentials['password']))->first();
 
-        if($user->account_status !== 'Assigned'){
+        if($user && $user->account_status !== 'Assigned'){
 
             return response()->json([
                 'status' => false,
@@ -27,13 +27,28 @@ class AuthenticationController extends Controller
         }
 
         if($user){
-            $token = $user->createToken($user->user_id)->plainTextToken;
 
-            return response()->json([
-                'token' => $token,
-                'user' => $user,
-                'status' => true
-            ],200);
+            $permitted_sections = [25,28];
+
+            // if permanent,supply or ict
+            if($user->assignment->employee_status_id === 1 || in_array($user->assignment->section->section_id,$permitted_sections)){
+                $token = $user->createToken($user->user_id)->plainTextToken;
+
+                return response()->json([
+                    'token' => $token,
+                    'user' => $user,
+                    'status' => true
+                ],200);
+            }
+
+            // not permanent
+            else{
+                return response()->json([
+                    'status' => false,
+                    'message' => 'You Currently Have No Access to the System, Permanent and Admin Accounts Are Only Permitted Access. For More Information, Please Contact ICTMU Section.',
+                ],401);
+            }
+
         }
 
         else{
