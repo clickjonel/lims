@@ -165,9 +165,9 @@
 
                     <Button @click="stock(item)" label="Create Stock Card for This Item" severity="info" class="text-xs" size="small" :disabled = "item.availability === 2 || item.stocked === 1"/>
                     
-                    <div class="w-full flex flex-col justify-start items-start text-red-800 font-lexend italic font-light text-xs">
-                        <span v-if="item.availability === 2">*Item is already added to stock card</span>
-                        <span v-if="item.stocked === 1">*Item is a balance delivery</span>
+                    <div class="w-full flex flex-col justify-start items-start text-red-800 italic font-medium text-xs">
+                        <span v-if="item.stocked === 1">*Item is already added to stock cards</span>
+                        <span v-if="item.availability === 2">*Item is a balance delivery</span>
                     </div>
 
                 </div>

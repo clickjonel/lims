@@ -138,7 +138,7 @@
                 <span>PN: {{ property.property_no }}</span>
                 <span>EU: {{ property.current_user.user.full_name }}</span>
                 <span>DA: {{ property.current_user.issuance_date }}</span>
-                <span>UC: Shayne</span>
+                <span>UC: {{ property.unit_cost }}</span>
             </div>
         </div>
 

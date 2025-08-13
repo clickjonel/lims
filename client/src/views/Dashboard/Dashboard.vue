@@ -60,6 +60,7 @@
         recepient:string
         stock_card:{
             stock_no:string
+            stock_name:string
             item_description:string
         }
     }
@@ -173,7 +174,7 @@
                     <span class="w-[10%] px-2 py-1">{{ transaction.iar_no ?? transaction.ptr_no }}</span>
                     <span class="w-[15%] px-2 py-1">{{ transaction.recepient }}</span>
                     <span class="w-[15%] px-2 py-1">{{ transaction.stock_card.stock_no }}</span>
-                    <span class="w-[30%] px-2 py-1">{{ transaction.stock_card.item_description }}</span>
+                    <span class="w-[30%] px-2 py-1">{{ transaction.stock_card.stock_name }}</span>
                 </div>
             </div>
         </div>
