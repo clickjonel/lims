@@ -149,7 +149,7 @@
                     <span class="w-[15%] py-1 px-2">{{ receipt.delivery.requisitioning_section.section_name }}</span>
                     <span class="w-[15%] py-1 px-2">{{ receipt.delivery.end_user.full_name }}</span>
                     <div class="w-[30%] py-1 px-2 flex flex-col align-items-start gap-2">
-                        <span class="text-xs" v-for="item in receipt.delivery.delivery_items" v-html="item.description"></span>
+                        <span class="text-xs truncate" v-for="item in receipt.delivery.delivery_items" v-html="item.description"></span>
                     </div>
                 </div>
             </div>

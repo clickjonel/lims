@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', {
     setUser(user: User) {
       this.user = user
       this.isAuthenticated = true
-      this.isAdmin = user.assignment.section.section_id === 25 || user.assignment.section.section_id === 28 ? true : false
+      this.isAdmin = user.assignment.section.section_id === import.meta.env.VITE_SUPPLY_SECTION_ID || user.assignment.section.section_id === import.meta.env.VITE_ICT_SECTION_ID ? true : false
     },
 
     setToken(token: string) {

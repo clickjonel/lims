@@ -31,7 +31,6 @@
         })
         .then((response)=>{
             authStore.setUser(response.data.user)
-            console.log(response.data.user)
             authStore.setToken(response.data.token)
             authStore.isAuthenticated = true
             toast.add({ 
@@ -71,7 +70,7 @@
                 <span class="text-xl font-medium">Center for Health Development - Cordillera</span>
                 <span class="text-lg">Department of Health</span>
             </div>
-            <div class="w-full flex flex-col justify-center items-center gap-6">
+            <!-- <div class="w-full flex flex-col justify-center items-center gap-6">
                 <FloatLabel variant="on" class="w-2/3">
                     <InputText v-model="credentials.username" class="w-full"/>
                     <label>Username</label>
@@ -88,7 +87,27 @@
                     <label>Password</label>
                 </FloatLabel>
                 <Button @click="login" label="Login" icon="pi pi-sign-in" class="w-2/3"/>
-            </div>
+            </div> -->
+             <form @submit.prevent="login" class="w-full flex flex-col justify-center items-center gap-6">
+                <FloatLabel variant="on" class="w-2/3">
+                    <InputText v-model="credentials.username" class="w-full" />
+                    <label>Username</label>
+                </FloatLabel>
+                
+                <FloatLabel variant="on" class="w-2/3">
+                    <Password v-model="credentials.password" :feedback="false" toggle-mask class="w-full"
+                        :pt="{
+                        pcInputText:{
+                            root: { class: 'w-full' },
+                            input: { class: 'w-full' }
+                        }
+                        }"
+                    />
+                    <label>Password</label>
+                </FloatLabel>
+                
+                <Button type="submit" label="Login" icon="pi pi-sign-in" class="w-2/3" />
+            </form>
         </div>
     </div>
 </template>
