@@ -74,7 +74,7 @@ class StockCardController extends Controller
 
     public function find(Request $request):JsonResponse
     {
-        $stockCard = StockCard::with(['stockCardTransactions','measurementUnit','section'])->find($request->id);
+        $stockCard = StockCard::with(['stockCardTransactions','section'])->find($request->id);
 
         return response()->json([
             'stock_card' => $stockCard
