@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', {
       this.isAuthenticated = true
       this.isAdmin =
         user.assignment.section.section_id === Number(import.meta.env.VITE_SUPPLY_SECTION_ID) ||
-        user.assignment.section.section_id === Number(import.meta.env.VITE_ICT_SECTION_ID); 
+        user.assignment.section.section_id === Number(import.meta.env.VITE_ICT_SECTION_ID);
     },
 
     setToken(token: string) {
@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await axios.get('user')
         this.setUser(response.data)
-      } 
+      }
       catch (error) {
         this.clearUser()
       }
