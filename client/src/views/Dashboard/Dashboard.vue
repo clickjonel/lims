@@ -11,6 +11,7 @@
 
     onMounted(()=>{
        fetchDashboardData()
+       console.log(auth.isAdmin)
     })
 
     const fetchDashboardData = async () => {
