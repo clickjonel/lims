@@ -46,7 +46,7 @@
             toast.add({ 
                 severity: 'error', 
                 summary: 'Login Failed', 
-                detail: error.response.data.message, 
+                detail: error.response?.data?.message, 
                 life: 3000 
             });
             console.log(error)

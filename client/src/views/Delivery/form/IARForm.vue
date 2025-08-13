@@ -35,6 +35,7 @@
         deliveryPlacesString.value = iar.value.delivery_receipts.map(receipt =>receipt.delivery_place).filter(no => no).join(', ')
         itemMeasurementsString.value = iar.value.delivery_items.map(item => item.measurement_unit?.name).filter(no => no).join(', ')
         itemUnitCostsString.value = iar.value.delivery_items.map(item => item.unit_cost).filter(no => no).join(', ')
+        console.log(iar.value)
     } 
 
 

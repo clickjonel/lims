@@ -176,9 +176,9 @@ class DeliveryController extends Controller
         ])
 
         //sum of unit cost
-        ->withSum('deliveryItems as total_sum_items', 'unit_cost') 
-        ->withSum('delivered_items as total_sum_delivered', 'unit_cost') 
-        ->withSum('balance_items as total_sum_balance', 'unit_cost') 
+        ->withSum('deliveryItems as total_sum_items', DB::raw('quantity * unit_cost'))
+        ->withSum('delivered_items as total_sum_delivered', DB::raw('quantity * unit_cost')) 
+        ->withSum('balance_items as total_sum_balance', DB::raw('quantity * unit_cost')) 
 
         //total quantity
         ->withSum('deliveryItems as total_quantity_items', 'quantity') 
@@ -186,6 +186,7 @@ class DeliveryController extends Controller
         ->withSum('balance_items as total_quantity_balance', 'quantity') 
 
         ->find($request->id);
+        
         return response()->json([
             'delivery' => $delivery
         ]);
