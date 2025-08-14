@@ -8,6 +8,7 @@
     import { useAuthStore } from '@/stores/authStore';
     import { useRouter } from 'vue-router';
     import { useToast } from 'primevue';
+    import { useLoader } from '@/composables/useLoader';
 
 
 
@@ -15,6 +16,7 @@
     const authStore = useAuthStore()
     const router = useRouter()
     const toast = useToast()
+    const { showLoader,hideLoader } = useLoader('Loading, Please Wait...')
 
     // variables
     var credentials = ref(<Credentials>{
@@ -25,6 +27,7 @@
 
     // functions
     const login = () => {
+        showLoader()
         axios.post('login',{
             username:credentials.value.username,
             password:credentials.value.password,
@@ -50,6 +53,9 @@
                 life: 3000 
             });
             console.log(error)
+        })
+        .finally(()=>{
+            hideLoader()
         })
     }
 
