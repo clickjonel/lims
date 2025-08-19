@@ -17,9 +17,14 @@
 
   var drawerVisible = ref(false);
   var profilePopover = ref()
+  var notifPopover = ref()
 
   const toggleProfile = (event:any) => {
       profilePopover.value.toggle(event);
+  }
+
+  const toggleNotif = (event:any) => {
+      notifPopover.value.toggle(event);
   }
 
   const navigateTo = (path:string) => {
@@ -51,7 +56,10 @@
         <div class="w-full min-h-[6%] h-[6%] flex justify-between items-center px-4 bg-white">
             <Button @click="drawerVisible = true" icon="pi pi-arrow-right" rounded severity="info" variant="filled" size="small"/>
             <span class="text-base font-lexend">LIMS | {{ route.name }}</span>
-            <Button type="button" :label="auth.user?.nickname" @click="toggleProfile" rounded size="small"/>
+            <div class="flex justify-center items-center gap-2">
+                <Button @click="toggleNotif" icon="pi pi-bell" rounded severity="help" variant="filled" size="small" badge="2"/>
+                <Button type="button" :label="`${auth.user?.assignment.section.short_name} - ${auth.user?.nickname}`" @click="toggleProfile" rounded size="small"/>
+            </div>
         </div>
         <div class="w-full min-h-[93.5%] h-[93.5%] bg-white">
             <RouterView />
@@ -83,9 +91,36 @@
         </div>
     </Drawer>
 
-    <Popover ref="profilePopover">
+    <Popover ref="profilePopover" class="w-[300px]">
         <div class="flex flex-col gap-2">
           <Button label="Logout" @click="logout" size="small" class="w-full" variant="outlined" severity="danger"/>
+        </div>
+    </Popover>
+
+    <Popover ref="notifPopover" class="w-[500px]">
+        <div class="flex flex-col gap-2 font-poppins">
+            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                <span class="text-base font-semibold uppercase">Delivery</span>
+                <span class="font-light mb-2">2 Items delivered for inspection to the Supply Office Warehouse.</span>
+                <Button v-tooltip="{ value: 'Mark as Read', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-check-circle"  size="small" rounded class="text-xs"/>
+            </div>
+            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                <span class="text-base font-semibold uppercase">Stock Card</span>
+                <span class="font-light">Token for Participant - Stainless steel coffee mug with leakproof lid; laser engraved with Nutrition Program Slogan vacuum insulated cup. | 2 pieces allocated to LHSD-PHMC</span>
+                <Button v-tooltip="{ value: 'Mark as Read', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-check-circle"  size="small" rounded class="text-xs"/>
+            </div>
+            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                <span class="text-base font-semibold uppercase">Stock Card</span>
+                <span class="font-light">Item has been fully allocated and balance of 0</span>
+            </div>
+            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                <span class="text-base font-semibold uppercase">Expiry</span>
+                <span class="font-light">Item is near expiry in the next month/s</span>
+            </div>
+            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                <span class="text-base font-semibold uppercase">Property</span>
+                <span class="font-light">New Property named(MR) under your name</span>
+            </div>
         </div>
     </Popover>
 

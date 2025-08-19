@@ -8,6 +8,7 @@ use App\Models\Delivery;
 use App\Models\DeliveryInvoices;
 use App\Models\DeliveryItems;
 use App\Models\DeliveryReceipts;
+use App\NotifiableTrait;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,6 +17,8 @@ use Illuminate\Support\Js;
 
 class DeliveryController extends Controller
 {
+    use NotifiableTrait;
+
     public function list(Request $request):JsonResponse
     {
         $page = $request->page ?? 1;

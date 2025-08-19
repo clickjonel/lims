@@ -8,11 +8,14 @@ use App\Models\Property;
 use App\Models\PropertyCurrentUser;
 use App\Models\PropertyUserHistory;
 use App\Models\User;
+use App\NotifiableTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+    use NotifiableTrait;
+
     public function list(Request $request):JsonResponse
     {
         $page = $request->page ?? 1;
@@ -70,6 +73,15 @@ class PropertyController extends Controller
             'acquisition_date' => $validated['acquisition_date'],
             'return_date' => null,
             'remarks' => null
+        ]);
+
+        $this->createNotification([
+            'notifiable_id' => $property->id,
+            'notifiable_class' => Property::class,
+            'path' => '/admin/properties/user',
+            'marked_read' => 0,
+            'user_id' => $validated['end_user'],
+            'section_id' => null,
         ]);
 
         return response()->json([

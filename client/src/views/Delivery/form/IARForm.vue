@@ -408,7 +408,7 @@
 
             <div class="w-full flex justify-start items-stretch divide-x font-light text-left">
                 <span class="max-w-[20%] w-[20%] pl-1">Total Quantity and Unit Delivered</span>
-                <span class="max-w-[80%] w-[80%] pl-1">{{ iar.total_sum_delivered }}</span>
+                <span v-for="item in iar.delivered_items" class="max-w-[80%] w-[80%] pl-1">{{ `${item.quantity} ${item.measurement_unit.name},` }}</span>
             </div>
 
             <div class="w-full flex justify-start items-stretch divide-x font-light text-left">
