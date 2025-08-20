@@ -40,7 +40,6 @@
             page:pagination.value.page,
             total:pagination.value.total,
             perPage:pagination.value.perPage,
-            // user_id:authStore.user?.user_id
        })
        if(response.apiResponseStatus === 200) {
          pagination.value.total = response.data.total

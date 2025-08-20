@@ -16,5 +16,7 @@ class Notification extends Model
         'marked_read',
         'user_id',
         'section_id',
+        'message',
+        'module'
     ];
 }

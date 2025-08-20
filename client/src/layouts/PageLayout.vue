@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import 'primeicons/primeicons.css'
   import Button from "primevue/button"
   import Drawer from 'primevue/drawer';
@@ -12,12 +12,28 @@
   const router = useRouter()
   const route = useRoute()
   const auth = useAuthStore()
-  const { postRequest } = useApi()
+  const { postRequest,fetchRequest } = useApi()
   const toast = useToast()
+  const notifications = ref([]);
+  const notificationCount = ref(0)
 
   var drawerVisible = ref(false);
   var profilePopover = ref()
   var notifPopover = ref()
+
+  onMounted(()=>{
+    fetchNotifications()
+  })
+
+  const fetchNotifications = async () => {
+      const response = await fetchRequest('notifications/list',{
+          user_id: auth.user?.user_id,
+          section_id: auth.user?.assignment?.section.section_id
+      })
+      notifications.value = response.data.notifications
+      notificationCount.value = response.data.total
+      console.log(response.data)
+  }
 
   const toggleProfile = (event:any) => {
       profilePopover.value.toggle(event);
@@ -57,7 +73,7 @@
             <Button @click="drawerVisible = true" icon="pi pi-arrow-right" rounded severity="info" variant="filled" size="small"/>
             <span class="text-base font-lexend">LIMS | {{ route.name }}</span>
             <div class="flex justify-center items-center gap-2">
-                <Button @click="toggleNotif" icon="pi pi-bell" rounded severity="help" variant="filled" size="small" badge="2"/>
+                <Button @click="toggleNotif" icon="pi pi-bell" rounded severity="help" variant="filled" size="small" :badge="String(notificationCount)"/>
                 <Button type="button" :label="`${auth.user?.assignment.section.short_name} - ${auth.user?.nickname}`" @click="toggleProfile" rounded size="small"/>
             </div>
         </div>
@@ -99,7 +115,7 @@
 
     <Popover ref="notifPopover" class="w-[500px]">
         <div class="flex flex-col gap-2 font-poppins">
-            <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+            <!-- <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
                 <span class="text-base font-semibold uppercase">Delivery</span>
                 <span class="font-light mb-2">2 Items delivered for inspection to the Supply Office Warehouse.</span>
                 <Button v-tooltip="{ value: 'Mark as Read', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-check-circle"  size="small" rounded class="text-xs"/>
@@ -120,7 +136,12 @@
             <div class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
                 <span class="text-base font-semibold uppercase">Property</span>
                 <span class="font-light">New Property named(MR) under your name</span>
-            </div>
+            </div> -->
+              <!-- <div v-for="notif in notifications" class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                  <span class="text-base font-semibold uppercase">{{ notif.module }} </span>
+                  <span class="font-light mb-2">{{ notif.message }}</span>
+                  <Button v-tooltip="{ value: 'Mark as Read', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-check-circle"  size="small" rounded class="text-xs"/>
+              </div> -->
         </div>
     </Popover>
 

@@ -6,12 +6,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\FundSourceController;
 use App\Http\Controllers\MeasurementUnitController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StockCardCategoryController;
 use App\Http\Controllers\StockCardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
+use App\Models\Delivery;
 use App\Models\StockCardCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -112,6 +114,13 @@ Route::group([
         Route::get('selection',[CategoryController::class,'selection']);
     });
 
+    // Notification Group
+    Route::group([
+        'prefix' => 'notifications'
+    ], function () {
+        Route::get('list',[NotificationController::class,'list']);
+    });
+
     Route::get('dashboard',[DashboardController::class,'getDashboardData']);
     
     Route::post('logout',[AuthenticationController::class,'logout']);
@@ -119,3 +128,4 @@ Route::group([
 });
 
 Route::post('/login',[AuthenticationController::class,'login']);
+

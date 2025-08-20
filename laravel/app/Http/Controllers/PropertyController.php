@@ -80,8 +80,10 @@ class PropertyController extends Controller
             'notifiable_class' => Property::class,
             'path' => '/admin/properties/user',
             'marked_read' => 0,
+            'message' => "New property added to your name.",
             'user_id' => $validated['end_user'],
             'section_id' => null,
+            'module' => 'Property'
         ]);
 
         return response()->json([
