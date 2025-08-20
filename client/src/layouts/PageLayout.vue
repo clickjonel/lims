@@ -137,11 +137,11 @@
                 <span class="text-base font-semibold uppercase">Property</span>
                 <span class="font-light">New Property named(MR) under your name</span>
             </div> -->
-              <!-- <div v-for="notif in notifications" class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
-                  <span class="text-base font-semibold uppercase">{{ notif.module }} </span>
-                  <span class="font-light mb-2">{{ notif.message }}</span>
+              <div v-for="notif in notifications" class="w-full flex flex-col justify-start items-start text-sm border-y p-2 cursor-pointer hover:bg-[#E3EEF9]"> 
+                  <!-- <span class="text-base font-semibold uppercase">{{ notif.module }} </span> -->
+                  <span class="mb-2" v-html="notif.message"></span>
                   <Button v-tooltip="{ value: 'Mark as Read', showDelay: 100, hideDelay: 300, pt: {text: {class: 'font-poppins text-xs'}}}" severity="info" icon="pi pi-check-circle"  size="small" rounded class="text-xs"/>
-              </div> -->
+              </div>
         </div>
     </Popover>
 

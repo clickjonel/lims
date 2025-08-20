@@ -82,6 +82,19 @@ class DeliveryController extends Controller
             $delivery->deliveryReceipts()->createMany($validated['receipts']);
             $delivery->deliveryItems()->createMany($validated['items']);
 
+            foreach($delivery->deliveryItems as $item){
+                $this->createNotification([
+                    'notifiable_id' => $item->id,
+                    'notifiable_class' => DeliveryItems::class,
+                    'path' => '/admin/deliveries/user',
+                    'marked_read' => 0,
+                    'message' => "<strong>You have a new delivered item<strong> <br> {$item->description}",
+                    'user_id' => $delivery->end_user,
+                    'section_id' => $delivery->req_office,
+                    'module' => 'Delivery Item'
+                ]);
+            }
+
             DB::commit();
         });
 
