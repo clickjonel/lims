@@ -25,6 +25,13 @@ import Sticker from '@/views/Property/form/Sticker.vue';
 import UserProperties from '@/views/Property/UserProperties.vue';
 import CreateItemStockCard from '@/views/Delivery/form/CreateItemStockCard.vue';
 import DrugsAndMeds from '@/views/StockCard/Categories/DrugsAndMeds.vue';
+import MedicalEquipments from '@/views/StockCard/Categories/MedicalEquipments.vue';
+import ICTEquipments from '@/views/StockCard/Categories/ICTEquipments.vue';
+import Tokens from '@/views/StockCard/Categories/Tokens.vue';
+import IEC from '@/views/StockCard/Categories/IEC.vue';
+import MedicalDentalLaboratorySupplies from '@/views/StockCard/Categories/MedicalDentalLaboratorySupplies.vue';
+import ICTSupplies from '@/views/StockCard/Categories/ICTSupplies.vue';
+import OfficeSupplies from '@/views/StockCard/Categories/OfficeSupplies.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -91,9 +98,51 @@ const router = createRouter({
           meta: { requiresAuth: true }
         },
         {
-          path: 'stock_card/drugs_and_medicines',
+          path: 'stock_cards/drugs_and_medicines',
           name: 'Drugs and Medicines Stock Cards',
           component: DrugsAndMeds,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/medical_equipments',
+          name: 'Medical Equipments Stock Cards',
+          component: MedicalEquipments,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/ict_equipments',
+          name: 'ICT Equipments Stock Cards',
+          component: ICTEquipments,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/tokens',
+          name: 'Tokens Stock Cards',
+          component: Tokens,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/iec',
+          name: 'IEC Stock Cards',
+          component: IEC,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/medical_and_dental_laboratory_supplies',
+          name: 'Medical Dental Laboratory Supplies Stock Cards',
+          component: MedicalDentalLaboratorySupplies,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/ict_supplies',
+          name: 'ICT Supplies Stock Cards',
+          component: ICTSupplies,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_cards/office_supplies',
+          name: 'Office Supplies Stock Cards',
+          component: OfficeSupplies,
           meta: { requiresAuth: true }
         },
 
