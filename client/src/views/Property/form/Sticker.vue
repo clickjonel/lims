@@ -65,6 +65,9 @@
             }
             issuance_date:string
         }
+        first_user:{
+            acquisition_date:string
+        }
     }
 
 </script>
@@ -116,7 +119,7 @@
                 <span>Article: {{ property.particulars }}</span>
                 <span>Serial Number: {{ property.serial_number ?? null }}</span>
                 <span>Property Number: {{ property.property_no }}</span>
-                <span>Date Acquired: {{ property.current_user.issuance_date }}</span>
+                <span>Date Acquired: {{ property.first_user.acquisition_date }}</span>
                 <span>Acquisition Cost: {{ property.unit_cost }}</span>
                 <span>End User/MR to: {{ property.current_user.user.full_name }}</span>
                 <span>Date Counted: {{ options.date_counted ?  new Date(options.date_counted).toLocaleDateString() : ''}}</span>
@@ -137,7 +140,7 @@
                 <span class="w-full border-b"></span>
                 <span>PN: {{ property.property_no }}</span>
                 <span>EU: {{ property.current_user.user.full_name }}</span>
-                <span>DA: {{ property.current_user.issuance_date }}</span>
+                <span>DA: {{ property.first_user.acquisition_date }}</span>
                 <span>UC: {{ property.unit_cost }}</span>
             </div>
         </div>
