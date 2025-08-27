@@ -27,6 +27,7 @@ class PropertyController extends Controller
                     'currentUser.user',
                     'firstUser'
                     ])
+                    // ->where('status','Active')
                     ->when($user_id, function ($query) use ($user_id) {
                         $query->whereHas('currentUser', function ($query) use ($user_id) {
                             $query->where('user_id', $user_id);

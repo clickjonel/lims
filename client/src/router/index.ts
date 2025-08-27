@@ -24,6 +24,7 @@ import CreateInventoryReport from '@/views/Property/form/CreateInventoryReport.v
 import Sticker from '@/views/Property/form/Sticker.vue';
 import UserProperties from '@/views/Property/UserProperties.vue';
 import CreateItemStockCard from '@/views/Delivery/form/CreateItemStockCard.vue';
+import DrugsAndMeds from '@/views/StockCard/Categories/DrugsAndMeds.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,6 +88,12 @@ const router = createRouter({
           path: 'properties/user',
           name: 'User Properties',
           component: UserProperties,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock_card/drugs_and_medicines',
+          name: 'Drugs and Medicines Stock Cards',
+          component: DrugsAndMeds,
           meta: { requiresAuth: true }
         },
 

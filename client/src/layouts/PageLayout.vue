@@ -14,7 +14,7 @@
   const auth = useAuthStore()
   const { postRequest,fetchRequest } = useApi()
   const toast = useToast()
-  const notifications = ref([]);
+  const notifications = ref(<Notification[]>[]);
   const notificationCount = ref(0)
 
   var drawerVisible = ref(false);
@@ -64,6 +64,13 @@
       }
   }
 
+  interface Notification{
+      id:number
+      message:string
+      module:string
+      is_read:boolean
+  }
+
 </script>
 
 <template>
@@ -97,6 +104,16 @@
             <div class="w-full flex flex-col justify-start items-start gap-2 p-2">
               <span class="uppercase font-medium text-lg">Stock Cards</span>
               <span v-if="auth.isAdmin" @click="navigateTo('/admin/stock_cards')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Stock Cards</span>
+              <div v-if="auth.isAdmin" class="w-full flex flex-col justify-start items-start gap-2 ml-6 text-sm">
+                  <span @click="navigateTo('stock_card/drugs_and_medicines')" class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'Drugs and Medicines Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Drugs and Medicines</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'Medical Equipments Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Medical Equipments</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'ICT Equipments Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">ICT Equipments</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'Tokens Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Tokens</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'IEC Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">IEC</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'Medical and Dental Laboratory Supplies Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Medical and Dental Laboratory Supply</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'ICT Supply Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">ICT Supplies</span>
+                  <span class="w-full p-2 hover:bg-emerald-700 hover:text-white cursor-pointer" :class="route.name === 'Office Supply Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Office Supplies</span>
+              </div>
               <span @click="navigateTo('/admin/stock_cards/section')" class="w-full py-2 pl-2 cursor-pointer hover:bg-emerald-700 hover:text-white" :class="route.name === 'Section Stock Cards' ? 'bg-emerald-700 text-white shadow-md shadow-slate-600' : '' ">Section Stock Cards</span>
             </div>
             <div class="w-full flex flex-col justify-start items-start gap-2 p-2">

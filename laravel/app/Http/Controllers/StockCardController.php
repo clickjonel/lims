@@ -22,6 +22,7 @@ class StockCardController extends Controller
         $perPage = $request->perPage ?? 10;
         $searchKeyword = trim($request->searchKeyword ?? '');
         $section_id = $request->section_id ?? null;
+        $category_id = $request->category_id ?? null;
 
         $stockCardEloquent = StockCard::with([
                     'stockCardTransactions',
@@ -30,6 +31,9 @@ class StockCardController extends Controller
                     ])
                     ->when($section_id, function ($query) use ($section_id) {
                         $query->where('req_office', $section_id);
+                    })
+                    ->when($category_id, function ($query) use ($category_id) {
+                        $query->where('category', $category_id);
                     })
                     ->when($searchKeyword, function ($query) use ($searchKeyword) {
                         $query->where('stock_no', 'like', '%' . $searchKeyword . '%')
