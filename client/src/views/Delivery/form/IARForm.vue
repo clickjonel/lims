@@ -17,6 +17,7 @@
     const deliveryPlacesString = ref(<string>'')
     const itemMeasurementsString = ref(<string>'')
     const itemUnitCostsString = ref(<string>'')
+    const deliveredItemsWithUnitString = ref(<string>'')
 
     onMounted(async () => {
         await fetchIARData();
@@ -35,7 +36,7 @@
         deliveryPlacesString.value = iar.value.delivery_receipts.map(receipt =>receipt.delivery_place).filter(no => no).join(', ')
         itemMeasurementsString.value = iar.value.delivery_items.map(item => item.measurement_unit?.name).filter(no => no).join(', ')
         itemUnitCostsString.value = iar.value.delivery_items.map(item => item.unit_cost).filter(no => no).join(', ')
-        console.log(iar.value)
+        deliveredItemsWithUnitString.value = iar.value.delivered_items.map(item => `${item.quantity} ${item.measurement_unit?.name}`).filter(no => no).join(', ')
     } 
 
 
@@ -408,7 +409,7 @@
 
             <div class="w-full flex justify-start items-stretch divide-x font-light text-left">
                 <span class="max-w-[20%] w-[20%] pl-1">Total Quantity and Unit Delivered</span>
-                <span v-for="item in iar.delivered_items" class="max-w-[80%] w-[80%] pl-1">{{ `${item.quantity} ${item.measurement_unit.name},` }}</span>
+                <span class="max-w-[80%] w-[80%] pl-1">{{ deliveredItemsWithUnitString }}</span>
             </div>
 
             <div class="w-full flex justify-start items-stretch divide-x font-light text-left">
