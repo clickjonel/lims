@@ -9,6 +9,7 @@
     import Button from 'primevue/button';
     import Select from 'primevue/select';
     import FormLayout from '@/layouts/FormLayout.vue';
+    import DatePicker from 'primevue/datepicker';
 
     const { fetchRequest,postRequest } = useApi()
     const toast = useToast()
@@ -69,7 +70,7 @@
             fund_cluster: delivery.value.fund_source,
             warehouse: item.warehouse,
             batch_no: item.batch_no,
-            expiry_date: item.expiry_date,
+            expiry_date: item.expiry_date ? item.expiry_date.toISOString().split('T')[0] : '',
             category: item.category,
             req_office: delivery.value.req_office,
             quantity: item.quantity,
@@ -110,7 +111,7 @@
         fund_cluster: number,
         warehouse: number,
         batch_no: string,
-        expiry_date: string,
+        expiry_date: Date | null,
         category: number,
         req_office: number,
         quantity: number,
@@ -160,6 +161,17 @@
                         <FloatLabel class="w-full" variant="on">
                             <Select v-model="item.warehouse" :options="warehouses" optionLabel="name" optionValue="id" size="small" class="w-full" />
                             <label>Warehouse</label>
+                        </FloatLabel>
+                    </div>
+
+                    <div class="w-full flex justify-start items-start gap-2">
+                        <FloatLabel class="w-full" variant="on">
+                            <InputText v-model="item.batch_no" class="w-full" size="small"/>
+                            <label>Batch Number(if only single batch number)</label>
+                        </FloatLabel>
+                        <FloatLabel class="w-full" variant="on">
+                            <DatePicker v-model="item.expiry_date"  class="w-full" size="small"/>
+                            <label>Expiry Date</label>
                         </FloatLabel>
                     </div>
 

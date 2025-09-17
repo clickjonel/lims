@@ -147,8 +147,9 @@
                         <span class="min-w-[25%]">Total Cost</span>
                     </div>
                 </div>
-                <span class="min-w-[15%] pl-1">DR/SI/RIS/PTR/BL No.</span>
-                <span class="min-w-[15%] pl-1">Remarks</span>
+                <span class="min-w-[10%] pl-1">DR/SI/RIS/PTR/BL No.</span>
+                <span class="min-w-[10%] pl-1">Recipient</span>
+                <span class="min-w-[10%] pl-1">Remarks</span>
             </div>
             <div class="w-full flex flex-col justify-start items-start divide-y">
                 <div v-for="transaction in stock_card.stock_card_transactions" class="min-w-full flex justify-start items-stretch divide-x text-center font-light">
@@ -157,8 +158,9 @@
                     <span class="min-w-[15%]">{{ transaction.issued }}</span>
                     <span class="min-w-[15%]">{{ transaction.balance }}</span>
                     <span class="min-w-[15%]">{{ transaction.total_cost }}</span>
-                    <span class="min-w-[15%]">{{ transaction.iar_no ?? transaction.ptr_no }}</span>
-                    <span class="min-w-[15%]">{{ transaction.remarks }}</span>
+                    <span class="min-w-[10%]">{{ transaction.iar_no ?? transaction.ptr_no }}</span>
+                    <span class="min-w-[10%]">{{ transaction.recepient }}</span>
+                    <span class="min-w-[10%]">{{ transaction.remarks }}</span>
                 </div>
             </div>
 

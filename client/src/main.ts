@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import Material from '@primeuix/themes/material';
-import Nora from '@primeuix/themes/nora';
 import Tooltip from 'primevue/tooltip';
 
 import ToastService from 'primevue/toastservice';
