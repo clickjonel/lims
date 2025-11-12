@@ -22,7 +22,7 @@ class DeliveryController extends Controller
     public function list(Request $request):JsonResponse
     {
         $page = $request->page ?? 1;
-        $perPage = $request->perPage ?? 10;
+        $perPage = $request->perPage ?? 20;
         $searchKeyword = trim($request->searchKeyword ?? '');
         $user_id = $request->user_id ?? null;
         $section_id = $request->section_id ?? null;
@@ -243,5 +243,15 @@ class DeliveryController extends Controller
             'message' => 'Successfully Updated Delivery Acceptance.'
         ]);
     }
+
+public function testDelivery(Request $request): JsonResponse
+{
+    $deliveries = Delivery::simplePaginate(100);
+
+    return response()->json([
+        'list' => $deliveries->items(),
+        'pagination' => collect($deliveries)->except('data')->toArray()
+    ]);
+}
 
 }

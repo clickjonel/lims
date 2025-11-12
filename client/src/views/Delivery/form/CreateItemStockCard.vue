@@ -27,6 +27,10 @@
     const findDelivery = async () => {
         const response = await fetchRequest('deliveries/find',{id:route.params.id})
         delivery.value = response.data.delivery
+
+        // delivery.value.delivery_items.forEach(item => {
+        //     console.log(item.expiry_date === null)
+        // })
     }
 
     const fetchWarehouses = async () => {

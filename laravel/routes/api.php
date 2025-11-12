@@ -22,6 +22,8 @@ Route::get('/user', function (Request $request) {
     return $request->user()->load(['assignment.section']);
 })->middleware('auth:sanctum');
 
+Route::get('delivery/list',[DeliveryController::class,'list']);
+Route::get('delivery/test',[DeliveryController::class,'testDelivery']);
 
 Route::group([
     'middleware' => ['auth:sanctum']
@@ -31,7 +33,7 @@ Route::group([
     Route::group([
         'prefix' => 'deliveries'
     ], function () {
-        Route::get('list',[DeliveryController::class,'list']);
+        //Route::get('list',[DeliveryController::class,'list']);
         Route::post('create',[DeliveryController::class,'create']);
         Route::post('update',[DeliveryController::class,'update']);
         Route::get('find',[DeliveryController::class,'find']);
