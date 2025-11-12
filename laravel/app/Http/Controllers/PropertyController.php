@@ -11,6 +11,7 @@ use App\Models\User;
 use App\NotifiableTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PropertyController extends Controller
 {
@@ -130,6 +131,11 @@ class PropertyController extends Controller
     {
         $users = User::with([
                 'assignment.item',
+                'properties' => function($query) {
+                    $query->whereHas('property', function($q) {
+                        $q->where('status', 'active');
+                    });
+                },
                 'properties.property.firstUser',
                 'properties.property.measurementUnit'
             ])->findMany($request->users);
@@ -137,6 +143,24 @@ class PropertyController extends Controller
         return response()->json([
             'users' => $users
         ]);
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:lims.lims_properties,id',
+            'property_no' => ['required','string',Rule::unique('lims.lims_properties', 'property_no')->ignore($request->id, 'id')],
+            'measurement_unit' => 'numeric|exists:lims_measurements:id',
+            'particulars' => 'required|string',
+            'unit_cost' => 'required|numeric',
+            'status' => 'required|string',
+            'remarks' => 'nullable|string',
+            'main_category_id' => 'nullable|numeric'
+        ]);
+
+        Property::find($validated['id'])->update($validated);
+
+        return response()->json('Updated Successfully');
     }
 
 

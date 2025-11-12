@@ -63,6 +63,7 @@ Route::group([
         Route::get('find/property_no',[PropertyController::class,'findByPropertyNo']);
         Route::post('transfer',[PropertyController::class,'transfer']);
         Route::get('users',[PropertyController::class,'fetchUserProperties']);
+        Route::post('/update',[PropertyController::class,'update']);
     });
 
 
